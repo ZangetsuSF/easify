@@ -22,6 +22,9 @@ Clone the repo with and install required modules via following commands.
 Dependencies to create your own executables:
 * pip install --upgrade pyinstaller pywin32 pefile
 
+Executable creation command:
+* pyinstaller --clean --name Easify --onefile main.py
+
 ------
 
 **Problems:**
