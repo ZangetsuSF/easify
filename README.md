@@ -6,15 +6,19 @@ A little tool to fix some basic issues Windows users are experiencing while usin
 
 **Usage**
 
-* For non-tech users
-Just download the standalone executable file which is located in "dist" folder.
+* **For non-tech users**
 
-* Techy users
+Just download the standalone executable file which is located in **dist** folder.
+
+* **Techy users**
+
 Clone the repo with and install required modules via following commands.
+
 *git clone https://github.com/ZangetsuSF/easify.git
 *pip install --upgrade keyboard admin pywin32
 
 Dependencies to create your own executables:
+
 *pip install --upgrade pyinstaller pywin32 pefile
 
 ------
