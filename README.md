@@ -8,7 +8,9 @@ A little tool to fix some basic issues Windows users are experiencing while usin
 
 **For basic users**
 
-Just download and run the standalone executable file (Easify.exe) which is located in **dist** folder.
+Just download and run the standalone executable file (Easify.exe) via link below or from **dist** folder.
+
+https://github.com/ZangetsuSF/easify/raw/main/dist/Easify.exe
 
 **For advanced users**
 
