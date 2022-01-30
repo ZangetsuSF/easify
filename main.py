@@ -109,9 +109,9 @@ def show_header():
     print("\n" + "###############################################")
     
     if lang == "tr_TR":
-        print("##    Easify - Seedify Fund Helper Script    ##")
-    else:
         print("##    Easify - Seedify Fund Yardım Betiği    ##")
+    else:
+        print("##    Easify - Seedify Fund Helper Script    ##")
     
     print("###############################################" + "\n" + "\n")
     

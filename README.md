@@ -6,11 +6,11 @@ A little tool to fix some basic issues Windows users are experiencing while usin
 
 **Usage**
 
-**For non-tech users**
+**For basic users**
 
-Just download the standalone executable file which is located in **dist** folder.
+Just download and run the standalone executable file (Easify.exe) which is located in **dist** folder.
 
-**Techy users**
+**For advanced users**
 
 Clone the repo with and install required modules via following commands.
 
