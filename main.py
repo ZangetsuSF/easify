@@ -1,22 +1,31 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+##############################################
+## External modules
+##############################################
+
+# module install command: pip install keyboard
+import keyboard
+# module install command: pip install admin
+import admin
+# module install command: pip install pywin32
+from win32com.client import Dispatch
+
+##############################################
+## Built-in modules
+##############################################
+
 from os import getenv, system, rmdir, mkdir, path
 from time import sleep
 from subprocess import call, DEVNULL, STDOUT
 from shutil import rmtree
 
-# from pynput.keyboard import Listener, Key
-import keyboard
-
 import sys
 import platform
 import locale
 import ctypes
-import admin
 import winreg as registry
-
-from win32com.client import Dispatch
 
 # Detect system language  
 if platform.system() == "Windows":
@@ -98,7 +107,12 @@ def show_header():
     call("cls", shell=True)
     
     print("\n" + "###############################################")
-    print("##    Easify - Seedify Fund Helper Script    ##")
+    
+    if lang == "tr_TR":
+        print("##    Easify - Seedify Fund Helper Script    ##")
+    else:
+        print("##    Easify - Seedify Fund Yardım Betiği    ##")
+    
     print("###############################################" + "\n" + "\n")
     
     sleep(2)
@@ -107,7 +121,10 @@ def show_header():
 def windows_only():
     # Check if operating system is Windows, exit if it is not
     if platform.system() != "Windows":
-        print("This script is suitable for Windows operating system only.")
+        if lang == "tr_TR":
+            print("Bu betik yalnızca Windows işletim sistemi ile uyumludur.")
+        else:
+            print("This script is suitable for Windows operating system only.")
         terminate_script()
 
 # Function to check Chrome installation
@@ -237,7 +254,7 @@ def create_website_list():
     
     # Seedify Fund claim page
     add_to_list(
-        "http://tinyurl.com/Seedify-IGO-Vesting",
+        "https://tinyurl.com/Seedify-IGO-Vesting",
         "6- Seedify - Vesting Table (Incognito)",
         "Chrome link to open Seedify Fund Vesting Table in incognito mode."
     )
@@ -318,7 +335,10 @@ def create_chrome_shortcut( target_url, file_name, desc, target_dir, work_dir, c
 
 # Function to fix network issues
 def fix_network():
-    print("\n" + "Fixing basic network issues..." + "\n")
+    if lang == "tr_TR":
+        print("\n" + "* Temel ağ problemleri çözülüyor..." + "\n")
+    else:
+        print("\n" + "* Fixing basic network issues..." + "\n")
     
     for s in fix_network_issues_1, fix_network_issues_2, flush_dns:
         call(s, shell=True)
@@ -326,7 +346,10 @@ def fix_network():
 
 # Function to reset Windows Time service
 def reset_time_service():
-    print("\n" + "Resetting Windows Time Service and its settings..." + "\n")
+    if lang == "tr_TR":
+        print("\n" + "* Windows Time hizmeti ve ayarları sıfırlanıyor..." + "\n")
+    else:
+        print("\n" + "* Resetting Windows Time Service and its settings..." + "\n")
     
     for s in stop_timesync_service, disable_timesync_service, enable_timesync_service:
         call(s, shell=True)
@@ -357,7 +380,10 @@ def set_registry_keys():
 
 # Function to sync local time to internet time
 def sync_local_time():
-    print("\n" + "Syncing with internet time..." + "\n")
+    if lang == "tr_TR":
+        print("\n" + "* Bilgisayarın saati internet üzerinden senkronize ediliyor..." + "\n")
+    else:
+        print("\n" + "* Syncing pc time with internet time..." + "\n")
     
     # double sync is not a typo, to make sure it worked
     for s in start_timesync_service, sync_time, sync_time:
@@ -367,28 +393,29 @@ def sync_local_time():
 # Function to show completion message
 def the_end():
     if lang == "tr_TR":
-        print("\n" + "* İşlem tamamlandı.")
+        print("\n" + "* Tebrikler! İşlem tamamlandı.")
         
         sleep(1)
         
         print("\n" + "\n" + "Kısayolların bulunduğu klasör:" + "\n" + target_full_path + "\n")
+        print("\n" + "Çıkmak için ENTER tuşuna basın..." + "\n")
     else:
-        print("\n" + "* Process is complete.")
+        print("\n" + "* Congratulations! Process is complete.")
         
         sleep(1)
         
         print("\n" + "\n" + "The directory where shortcuts are located:" + "\n" + target_full_path + "\n")
+        print("\n" + "Press ENTER to exit..." + "\n")
     
     # Wait for user to press ENTER key
-    print("\n" + "Press ENTER to exit..." + "\n")
     keyboard.wait('ENTER', suppress=True)
 
 # Function to terminate the script itself
 def terminate_script():
     if lang == "tr_TR":
-        print("* Sonlandırılıyor...")
+        print("* Betik sonlandırılıyor...")
     else:
-        print("* Terminating in...")
+        print("* Terminating script in...")
     
     [{print(x), sleep(1)} for x in range(3,0,-1)]
     quit()

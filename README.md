@@ -4,6 +4,21 @@ A little tool to fix some basic issues Windows users are experiencing while usin
 
 ------
 
+**Usage**
+
+* For non-tech users
+Just download the standalone executable file which is located in "dist" folder.
+
+* Techy users
+Clone the repo with and install required modules via following commands.
+*git clone https://github.com/ZangetsuSF/easify.git
+*pip install --upgrade keyboard admin pywin32
+
+Dependencies to create your own executables:
+*pip install --upgrade pyinstaller pywin32 pefile
+
+------
+
 **Problems:**
 * Chrome shows an old version of web page from its cache (causing users to not be able to claim/approve etc)
 * Chrome Translate (if user enables it) changes numbers and some details on page, making it unusable (shows wrong info and sometimes buttons don't work)
