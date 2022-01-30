@@ -1,12 +1,13 @@
 # Easify - Seedify Fund Helper Script
 
-A little tool to fix some basic issues Windows users are experiencing while using **Seedify Fund** website (participating in IGOs, claiming, staking/farming).
+This is a Python script which tries to fix some issues that Windows users are experiencing while using **Seedify Fund** website (IGO participation, claiming, staking/farming).
 
-Created by **ZangetsuSF** (Telegram admin in **Seedify Turkish Group** - https://t.me/sfundturkey)
+Created by **ZangetsuSF**
+Telegram admin in **Seedify Turkish Group** - https://t.me/sfundturkey
 
-Special thanks to **Seedify HODLers** (https://t.me/SeedifyHODLers) for their awesome tools and feedbacks about this script
+Special thanks to **Seedify HODLers** (https://t.me/SeedifyHODLers) for their awesome tools and feedbacks about this script.
 
-**NOTE:** This is not an official Seedify tool/script. Please read LICENSE before using.
+**NOTE:** This is not an official Seedify tool/script. Please read LICENSE before using it.
 
 ------
 
@@ -29,7 +30,7 @@ Dependencies to create your own executables:
 * pip install --upgrade pyinstaller pywin32 pefile
 
 Executable creation command (run inside easify directory):
-* pyinstaller --clean --name Easify --onefile main.py
+* pyinstaller --clean --distpath Windows --name Easify --onefile main.py
 
 ------
 
