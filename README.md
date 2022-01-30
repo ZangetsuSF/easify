@@ -3,11 +3,14 @@
 This is a Python script which tries to fix some issues that Windows users are experiencing while using **Seedify Fund** website (IGO participation, claiming, staking/farming).
 
 Created by **ZangetsuSF**
-Telegram admin in **Seedify Turkish Group** - https://t.me/sfundturkey
+
+Telegram admin ( @ZangetsuSF ) at **Seedify Fund Turkish Group** - https://t.me/sfundturkey
 
 Special thanks to **Seedify HODLers** (https://t.me/SeedifyHODLers) for their awesome tools and feedbacks about this script.
 
 **NOTE:** This is not an official Seedify tool/script. Please read LICENSE before using it.
+
+Seedify Fund official website: https://launchpad.seedify.fund/
 
 ------
 
