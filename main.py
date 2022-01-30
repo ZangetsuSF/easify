@@ -209,64 +209,78 @@ def create_website_list():
     
     # Seedify Fund official website
     add_to_list(
+        "https://identity.blockpass.org/frontend/#/register/input",
+        "2- KYC Check - Blockpass Login (Incognito)",
+        "Chrome link to open Blockpass Login page in incognito mode."
+    )
+    
+    # Seedify Fund official website
+    add_to_list(
         "https://launchpad.seedify.fund",
-        "2- Seedify - Launchpad (Incognito)",
+        "3- Seedify - Launchpad (Incognito)",
         "Chrome link to open Seedify website in incognito mode."
     )
     
     # Seedify Fund staking page
     add_to_list(
         "https://staking.seedify.fund/",
-        "3- Seedify - Staking-Farming (Incognito)",
+        "4- Seedify - Staking-Farming (Incognito)",
         "Chrome link to open Seedify staking/farming page in incognito mode."
     )
     
     # Seedify Fund claim page
     add_to_list(
         "https://claim.seedify.fund/",
-        "4- Seedify - Claim (Incognito)",
+        "5- Seedify - Claim (Incognito)",
         "Chrome link to open Seedify claim page in incognito mode."
+    )
+    
+    # Seedify Fund claim page
+    add_to_list(
+        "http://tinyurl.com/Seedify-IGO-Vesting",
+        "6- Seedify - Vesting Table (Incognito)",
+        "Chrome link to open Seedify Fund Vesting Table in incognito mode."
     )
     
     # Claim URL for Scotty Beam project
     add_to_list(
         "https://claim.scottybeam.io",
-        "5- Claim - ScottyBeam (Incognito)",
+        "7- Claim - ScottyBeam (Incognito)",
         "Chrome link to open ScottyBeam Claim page in incognito mode."
     )
     
     # Claim URL for Hololoot project
     add_to_list(
         "https://claiming.hololoot.io",
-        "6- Claim - Hololoot (Incognito)",
+        "8- Claim - Hololoot (Incognito)",
         "Chrome link to open Hololoot Claim page in incognito mode."
     )
     
     # Claim URL for Bit Hotel project
     add_to_list(
         "https://investors.bithotel.io",
-        "7- Claim - BitHotel (Incognito)",
+        "9- Claim - BitHotel (Incognito)",
         "Chrome link to open BitHotel Claim page in incognito mode."
     )
     
     # Combotools URL - Seedify HODLers
     add_to_list(
         "https://combotools.online/",
-        "8- Tools - Combotools - Investment Tracker (Incognito)",
+        "10- Tools - Combotools - Investment Tracker (Incognito)",
         "Chrome link to open Combotools page in incognito mode."
     )
     
     # Calculator URL - Seedify HODLers
     add_to_list(
         "https://seedifyhodlers.com/tools/calculator",
-        "9- Tools - SFUND Calculator (Incognito)",
+        "11- Tools - SFUND Calculator (Incognito)",
         "Chrome link to open SFUND Calculator page in incognito mode."
     )
     
     # ROI Tracker URL - Seedify HODLers
     add_to_list(
         "https://seedifyhodlers.com/tools/roi/",
-        "10- Tools - ROI Tracker (Incognito)",
+        "12- Tools - ROI Tracker (Incognito)",
         "Chrome link to open ROI Tracker page in incognito mode."
     )
 
