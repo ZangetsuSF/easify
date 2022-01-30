@@ -2,9 +2,9 @@
 
 This is a Python script which tries to fix some issues that Windows users are experiencing while using **Seedify Fund** website (IGO participation, claiming, staking/farming).
 
-Created by **ZangetsuSF**
+Created by **@ZangetsuSF**
 
-Telegram admin ( @ZangetsuSF ) at **Seedify Fund Turkish Group** - https://t.me/sfundturkey
+Telegram admin at **Seedify Fund Turkish Group** - https://t.me/sfundturkey
 
 Special thanks to **Seedify HODLers** (https://t.me/SeedifyHODLers) for their awesome tools and feedbacks about this script.
 
@@ -18,9 +18,9 @@ Seedify Fund official website: https://launchpad.seedify.fund/
 
 **For basic users**
 
-Just download and run the standalone executable file (Easify.exe) via link below or from **dist** folder.
+Just download and run the standalone executable file (Easify.exe) via link below or from **Windows** folder.
 
-https://github.com/ZangetsuSF/easify/raw/main/dist/Easify.exe
+https://github.com/ZangetsuSF/easify/raw/main/Windows/Easify.exe
 
 **For advanced users**
 
@@ -60,18 +60,22 @@ But current situation is not effective/optimal so I have decided to create a scr
 ------
 
 **What do these shortcuts have in common? (via runtime parameters)**
-* Incognito mode is on (no browser history/cookie used/created)
-* Auto-translate feature is disabled
-* DNS-Prefetch feature of Chrome is disabled
-* Background tasks of Chrome are disabled
+* Chrome Incognito mode is on (no browser history/cookie used/created)
+* Chrome auto-translate feature is disabled
+* Chrome DNS-Prefetch feature is disabled
+* Chrome background tasks are disabled
 
 ------
 
 **List of websites**
 * Buy SFUND (KuCoin, Gate.io and Pancakeswap links):
+
 https://pancakeswap.finance/swap?inputCurrency=0x477bc8d23c634c154061869478bce96be6045d12
+
 https://trade.kucoin.com/trade/SFUND-USDT
+
 https://www.gate.io/trade/sfund_usdt
+
 * KYC Check - Blockpass Login:
 https://identity.blockpass.org/frontend/#/register/input
 * Seedify - Launchpad:
