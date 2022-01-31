@@ -69,7 +69,7 @@ system32 = path.join(getenv("WinDir"), "System32")
 # Chrome executable path
 chrome_fullpath = path.join(getenv("PROGRAMFILES"), "Google\Chrome\Application", chrome_exec_name)
 
-# name of the directory that will be placed on user desktop and will contain Seedify links
+# Name of the directory that will be placed on user desktop and will contain Seedify links
 directory_name = "Seedify"
 
 # Desktop path for shortcuts
@@ -226,7 +226,9 @@ def create_directory():
 def create_website_list():
     # CEX/DEX URLs to buy SFUND
     add_to_list(
-        "https://pancakeswap.finance/swap?inputCurrency=0x477bc8d23c634c154061869478bce96be6045d12 https://trade.kucoin.com/trade/SFUND-USDT https://www.gate.io/trade/sfund_usdt",
+        "https://pancakeswap.finance/swap?inputCurrency=0x477bc8d23c634c154061869478bce96be6045d12 \
+            https://trade.kucoin.com/trade/SFUND-USDT \
+            https://www.gate.io/trade/sfund_usdt",
         "1- Buy SFUND (Incognito)",
         "Chrome link to open SFUND trade pages in incognito mode."
     )
@@ -323,7 +325,7 @@ def create_shortcuts():
     sleep(0.5)
 
     # Create shortcuts of websites inside target directory
-    # create_chrome_shortcut( URL, shortcut file name, description, shortcut directory path, working directory path, command to execute, command arguments)
+    # usage: create_chrome_shortcut( URL, shortcut file name, description, shortcut directory path, working directory path, command to execute, command arguments)
     [create_chrome_shortcut(w[0], w[1], w[2], target_full_path, desktop, chrome_fullpath, args) for w in websites]
 
 # Function to create shortcut files
@@ -334,7 +336,7 @@ def create_chrome_shortcut( target_url, file_name, desc, target_dir, work_dir, c
     shortcut.Targetpath = chrome_exec
     shortcut.WorkingDirectory = work_dir
     shortcut.Description = desc
-    # 1 - Normal, 3 - Maximized, 7 - Minimized
+    # Window styles: 1 - Normal, 3 - Maximized, 7 - Minimized
     shortcut.WindowStyle = "3"
     shortcut.Arguments = args + " " + target_url
 
@@ -366,7 +368,7 @@ def reset_time_service():
 
 # Function to modify Windows Time service registry values
 def set_registry_keys():
-    # Set target registry folder to edit keys-values in it (Windows Time Service error range)
+    # Set target registry folder to edit keys-values (Windows Time Service error ranges) in it
     key = registry.OpenKey(registry.HKEY_LOCAL_MACHINE,
                            r"SYSTEM\\CurrentControlSet\\Services\\w32time\\Config\\",
                            0,
@@ -376,7 +378,7 @@ def set_registry_keys():
     registry.SetValueEx(key, "MaxNegPhaseCorrection", 0, registry.REG_DWORD, 4294967295)
     registry.SetValueEx(key, "MaxPosPhaseCorrection", 0, registry.REG_DWORD, 4294967295)
 
-    # Set target registry folder to edit keys-values in it (Windows Time Service auto-sync)
+    # Set target registry folder to edit keys-values (Windows Time Service auto-sync settings) in it
     key = registry.OpenKey(registry.HKEY_LOCAL_MACHINE,
                            r"SYSTEM\\CurrentControlSet\\Services\\tzautoupdate",
                            0,
@@ -392,7 +394,7 @@ def sync_local_time():
     else:
         print("{}* Syncing pc time with internet time...{}".format(newline, newline))
 
-    # double sync is not a typo, to make sure it worked
+    # double sync is not a typo, it is to make sure sync is successful
     for s in start_timesync_service, sync_time, sync_time:
         call(s, shell=True)
         sleep(2)
