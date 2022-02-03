@@ -10,15 +10,25 @@ Telegram admin at [**Seedify Fund Turkish Group**](https://t.me/sfundturkey)
 
 Special thanks to [**Seedify HODLers**](https://t.me/SeedifyHODLers) for their awesome tools and feedbacks about this script.
 
-**NOTE:** This is NOT an OFFICIAL **Seedify Fund** tool/script. Please read LICENSE before using it.
+**NOTE:** This is **NOT** an **OFFICIAL Seedify Fund** tool/script. Please read LICENSE before using it.
 
 ------
+
+## Requirements
+
+* Chrome is necessary to create shortcuts. If Chrome doesn't exist, script will apply other steps/fixes.
 
 ## Usage
 
 ### For basic users
 
-Just download and run the standalone executable file (Easify.exe) via link below or from **Windows** folder.
+* Windows 7/8 users: **Microsoft Visual C++ Redistributable** packages below are required (both are official Microsoft links):
+
+[For Windows 7/8 32 bit](https://aka.ms/vs/17/release/vc_redist.x86.exe)
+
+[For Windows 7/8 64 bit](https://aka.ms/vs/17/release/vc_redist.x64.exe)
+
+* Windows 10 users: None. Just download and run the standalone executable via link below or from **[VWindows](https://github.com/ZangetsuSF/easify/tree/main/Windows)** folder.
 
 ```
 https://github.com/ZangetsuSF/easify/raw/main/Windows/Easify.exe
@@ -30,7 +40,7 @@ Clone the repo with and install required modules via following commands.
 
 ```
 git clone https://github.com/ZangetsuSF/easify.git
-pip install --upgrade keyboard admin pywin32
+pip install --upgrade admin keyboard pywin32
 cd easify
 python main.py
 ```

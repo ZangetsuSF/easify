@@ -18,7 +18,7 @@ from win32com.client import Dispatch
 
 from time import sleep
 from shutil import rmtree
-from platform import system as psys
+from platform import system as psys, release as prls
 from subprocess import call, DEVNULL, STDOUT
 from os import getenv, mkdir, path, linesep as newline
 
@@ -26,13 +26,6 @@ import sys
 import locale
 import ctypes
 import winreg as registry
-
-# Detect system language
-if psys() == "Windows":
-    windll = ctypes.windll.kernel32
-    lang = locale.windows_locale[ windll.GetUserDefaultUILanguage() ]
-else:
-    lang = "en_EN"
 
 ##############################################
 ## Variables
@@ -97,6 +90,24 @@ stop_timesync_service = 'net stop W32Time'
 start_timesync_service = 'net start W32Time'
 sync_time = 'w32tm /resync /rediscover'
 
+# Function to check operating system
+def check_os():
+    global lang
+    global win_version
+
+    # Check if operating system is Windows, exit if it is not
+    if psys() == "Windows":
+        win_version = prls()
+        windll = ctypes.windll.kernel32
+        lang = locale.windows_locale[ windll.GetUserDefaultUILanguage() ]
+
+        if lang != "tr_TR":
+            lang = "en_EN"
+    else:
+        lang = "en_EN"
+        print("This script is suitable for Windows operating system only.")
+        terminate_script()
+
 # Function to run the script as administrator
 def run_as_admin():
     if not ctypes.windll.shell32.IsUserAnAdmin():
@@ -119,16 +130,6 @@ def show_header():
     print("###############################################{}{}".format(newline, newline))
 
     sleep(2)
-
-# Function to check operating system
-def windows_only():
-    # Check if operating system is Windows, exit if it is not
-    if psys() != "Windows":
-        if lang == "tr_TR":
-            print("Bu betik yalnızca Windows işletim sistemi ile uyumludur.")
-        else:
-            print("This script is suitable for Windows operating system only.")
-        terminate_script()
 
 # Function to check Chrome installation
 def check_chrome():
@@ -378,14 +379,16 @@ def set_registry_keys():
     registry.SetValueEx(key, "MaxNegPhaseCorrection", 0, registry.REG_DWORD, 4294967295)
     registry.SetValueEx(key, "MaxPosPhaseCorrection", 0, registry.REG_DWORD, 4294967295)
 
-    # Set target registry folder to edit keys-values (Windows Time Service auto-sync settings) in it
-    key = registry.OpenKey(registry.HKEY_LOCAL_MACHINE,
-                           r"SYSTEM\\CurrentControlSet\\Services\\tzautoupdate",
-                           0,
-                           registry.KEY_ALL_ACCESS)
+    # Run on Windows 10 only
+    if win_version == 10:
+        # Set target registry folder to edit keys-values (Windows Time Service auto-sync settings) in it
+        key = registry.OpenKey(registry.HKEY_LOCAL_MACHINE,
+                            r"SYSTEM\\CurrentControlSet\\Services\\tzautoupdate",
+                            0,
+                            registry.KEY_ALL_ACCESS)
 
-    # Enable auto-sync via internet time
-    registry.SetValueEx(key, "Start", 0, registry.REG_DWORD, 3)
+        # Enable auto-sync via internet time
+        registry.SetValueEx(key, "Start", 0, registry.REG_DWORD, 3)
 
 # Function to sync local time to internet time
 def sync_local_time():
@@ -430,14 +433,14 @@ def terminate_script():
     quit()
 
 def main():
+    # Make sure we are on Windows
+    check_os()
+
     # Run script with elevated rights
     run_as_admin()
 
     # Show script name
     show_header()
-
-    # Check OS
-    windows_only()
 
     # Check Chrome installation
     check_chrome()
