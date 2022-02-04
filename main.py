@@ -431,7 +431,7 @@ def the_end():
     keyboard.wait('ENTER', suppress=True)
 
     # Exit script
-    exit()
+    quit()
 
 # Function to run console commands
 def execute_command(command_to_run):
