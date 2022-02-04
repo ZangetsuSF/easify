@@ -112,3 +112,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Scripts used for testing/packaging
+*.cmd
+*.bat

@@ -59,8 +59,13 @@ desktop = path.join(getenv("UserProfile"), "Desktop")
 # System32 path
 system32 = path.join(getenv("WinDir"), "System32")
 
+# Crop (x86) part from directory
+basedir = getenv("PROGRAMFILES")
+if basedir[-5:].lower() == "(x86)":
+    basedir = basedir[:len(basedir)-6]
+
 # Chrome executable path
-chrome_fullpath = path.join(getenv("PROGRAMFILES"), "Google\Chrome\Application", chrome_exec_name)
+chrome_fullpath = path.join(basedir, "Google\Chrome\Application", chrome_exec_name)
 
 # Name of the directory that will be placed on user desktop and will contain Seedify links
 directory_name = "Seedify"
@@ -77,8 +82,8 @@ HKEY_LOCAL_MACHINE = 0x80000002
 HKEY_CURRENT_USER = 0x80000001
 
 # Commands to fix network issues
-fix_network_issues_1 = 'netsh winsock reset >nul'
-fix_network_issues_2 = 'netsh int ip reset >nul'
+fix_network_issues_1 = 'netsh winsock reset'
+fix_network_issues_2 = 'netsh int ip reset'
 
 # Command to clear DNS cache
 flush_dns = 'ipconfig /flushdns'
@@ -118,7 +123,7 @@ def run_as_admin():
 
 # Function to clear console and show script name
 def show_header():
-    call("cls", shell=True)
+    execute_command("cls")
 
     print("{}###############################################".format(newline))
 
@@ -129,7 +134,7 @@ def show_header():
 
     print("###############################################{}{}".format(newline, newline))
 
-    sleep(2)
+    sleep(1)
 
 # Function to check Chrome installation
 def check_chrome():
@@ -140,36 +145,29 @@ def check_chrome():
     else:
         chrome_exists = False
 
-        if lang == "tr_TR":
-            print("{}Chrome kurulumu tespit edilemedi.{}Diğer işlemler uygulanacak.".format(newline))
-        else:
-            print("{}Couldn't detect a Chrome installation.{}Other steps will be applied.".format(newline))
-
-        sleep(1)
-
 # Function to show warning message
 def show_warning():
     global chrome_exists
 
-    if chrome_exists:
-        # Show warning messages according to system language (for English and Turkish only)
-        if lang == "tr_TR":
-            print("Tüm Chrome pencereleri kapatılacak!{}Yarım kalan işlerinizi tamamlamadan devam etmeyin!".format(newline, newline))
-            print("İşlem yapmadan çıkmak için pencerenin sağ üst köşesindeki X tuşu ile{}veya CTRL + C tuş kombinasyonu ile programı kapatın.".format(newline, newline))
-
-            input_message = "Devam etmek için ENTER tuşuna basın..."
+    # Show warning messages according to system language (for English and Turkish only)
+    if lang == "tr_TR":
+        if chrome_exists:
+            print("Tüm Chrome pencereleri kapatılacak!{}Yarım kalan işlerinizi tamamlamadan devam etmeyin!{}".format(newline, newline))
+            print("İşlem yapmadan çıkmak için pencerenin sağ üst köşesindeki X tuşu ile{}veya CTRL + C tuş kombinasyonu ile programı kapatın.{}".format(newline, newline))
         else:
+            print("{}Chrome kurulumu tespit edilemedi.{}Diğer işlemler uygulanacak.".format(newline,newline))
+
+        input_message = "Devam etmek için ENTER tuşuna basın..."
+    else:
+        if chrome_exists:
             print("All Chrome instances will be terminated!{}Please do not continue until you complete your work.{}".format(newline, newline))
             print("Click the X button on the top right corner of this window{}or press CTRL + C key combination to quit without making any changes.{}".format(newline, newline))
-
-            input_message = "Press ENTER key to continue..."
-    else:
-        if lang == "tr_TR":
-            input_message = "Devam etmek için ENTER tuşuna basın..."
         else:
-            input_message = "Press ENTER key to continue..."
+            print("{}Couldn't detect a Chrome installation.{}Other steps will be applied.".format(newline,newline))
 
-    input_message = "{}{}{}".format(newline, input_message, newline)
+        input_message = "Press ENTER key to continue..."
+
+    input_message = "{}{}{}{}".format(newline, input_message, newline, newline)
 
     print(input_message)
 
@@ -186,7 +184,7 @@ def terminate_chrome():
     # /IM - image name (window name of the target process)
     # /T - kill process and any child processes (terminate all windows)
     # leading space is necessary, not a typo
-    kill_args = " /F /IM {} /T >nul".format(chrome_exec_name)
+    kill_args = " /F /IM {} /T".format(chrome_exec_name)
 
     # Combine path and arguments
     kill_with_args = kill_path + kill_args
@@ -195,25 +193,25 @@ def terminate_chrome():
     if path.exists(kill_path):
         # Show warning message
         if lang == "tr_TR":
-            print("{}* Tüm Chrome pencereleri kapatılıyor...".format(newline))
+            print("* Tüm Chrome pencereleri kapatılıyor...")
         else:
-            print("{}* Terminating all Chrome instances...".format(newline))
+            print("* Terminating all Chrome instances...")
 
         # Wait 1 second
-        sleep(0.5)
+        sleep(1)
 
         # Run kill command with previously set arguments
-        call(kill_with_args, shell=True, stdout=DEVNULL, stderr=STDOUT)
+        execute_command(kill_with_args)
 
 # Function to create Seedify directory on desktop
 def create_directory():
     # Show directory creation message
     if lang == "tr_TR":
-        print("{}* Masaüstünde Seedify klasörü oluşturuluyor...".format(newline))
+        print("* Masaüstünde Seedify klasörü oluşturuluyor...")
     else:
-        print("{}* Creating Seedify folder on desktop...".format(newline))
+        print("* Creating Seedify folder on desktop...")
 
-    sleep(0.5)
+    sleep(1)
 
     # Check if the target directory for shortcuts exists
     if path.exists(target_full_path):
@@ -319,11 +317,11 @@ def add_to_list(shortcut_url, shortcut_filename, shortcut_desc):
 def create_shortcuts():
     # Show shortcut creation message
     if lang == "tr_TR":
-        print("{}* Kısayollar oluşturuluyor...".format(newline))
+        print("* Kısayollar oluşturuluyor...")
     else:
-        print("{}* Creating shortcuts...".format(newline))
+        print("* Creating shortcuts...")
 
-    sleep(0.5)
+    sleep(1)
 
     # Create shortcuts of websites inside target directory
     # usage: create_chrome_shortcut( URL, shortcut file name, description, shortcut directory path, working directory path, command to execute, command arguments)
@@ -346,23 +344,23 @@ def create_chrome_shortcut( target_url, file_name, desc, target_dir, work_dir, c
 # Function to fix network issues
 def fix_network():
     if lang == "tr_TR":
-        print("{}* Temel ağ problemleri çözülüyor...{}".format(newline, newline))
+        print("* Temel ağ problemleri çözülüyor...")
     else:
-        print("{}* Fixing basic network issues...{}".format(newline, newline))
+        print("* Fixing basic network issues...")
 
     for s in fix_network_issues_1, fix_network_issues_2, flush_dns:
-        call(s, shell=True)
+        execute_command(s)
         sleep(2)
 
 # Function to reset Windows Time service
 def reset_time_service():
     if lang == "tr_TR":
-        print("{}* Windows Time hizmeti ve ayarları sıfırlanıyor...{}".format(newline, newline))
+        print("* Windows Time hizmeti ve ayarları sıfırlanıyor...")
     else:
-        print("{}* Resetting Windows Time Service and its settings...{}".format(newline, newline))
+        print("* Resetting Windows Time Service and its settings...")
 
     for s in stop_timesync_service, disable_timesync_service, enable_timesync_service:
-        call(s, shell=True)
+        execute_command(s)
         sleep(2)
 
     set_registry_keys()
@@ -393,34 +391,51 @@ def set_registry_keys():
 # Function to sync local time to internet time
 def sync_local_time():
     if lang == "tr_TR":
-        print("{}* Bilgisayarın saati internet üzerinden senkronize ediliyor...{}".format(newline, newline))
+        print("* Bilgisayarın saati internet üzerinden senkronize ediliyor...")
     else:
-        print("{}* Syncing pc time with internet time...{}".format(newline, newline))
+        print("* Syncing pc time with internet time...")
 
     # double sync is not a typo, it is to make sure sync is successful
     for s in start_timesync_service, sync_time, sync_time:
-        call(s, shell=True)
+        execute_command(s)
         sleep(2)
 
 # Function to show completion message
 def the_end():
     if lang == "tr_TR":
-        print("{}* Tebrikler! İşlem tamamlandı.".format(newline))
-
+        print("* Tebrikler! İşlem tamamlandı.")
         sleep(1)
 
-        print("{}{}Kısayolların bulunduğu klasör:{}{}{}".format(newline, newline, newline, target_full_path, newline))
+        if chrome_exists:
+            print("{}{}Kısayolların bulunduğu klasör:{}{}{}".format(newline, newline, newline, target_full_path, newline))
+            sleep(1)
+
+        print("{}Değişikliklerin etkili olabilmesi için bilgisayarınızı yeniden başlatın.{}".format(newline, newline))
+        sleep(1)
+
         print("{}Çıkmak için ENTER tuşuna basın...{}".format(newline, newline))
     else:
-        print("{}* Congratulations! Process is complete.".format(newline))
-
+        print("* Congratulations! Process is complete.")
         sleep(1)
 
-        print("{}{}The directory where shortcuts are located:{}{}{}".format(newline, newline, newline, target_full_path, newline))
+        if chrome_exists:
+            print("{}{}The directory where shortcuts are located:{}{}{}".format(newline, newline, newline, target_full_path, newline))
+            sleep(1)
+
+        print("{}Restart your computer for changes to take effect.{}".format(newline, newline))
+        sleep(1)
+
         print("{}Press ENTER to exit...{}".format(newline, newline))
 
     # Wait for user to press ENTER key
     keyboard.wait('ENTER', suppress=True)
+
+    # Exit script
+    exit()
+
+# Function to run console commands
+def execute_command(command_to_run):
+    call(command_to_run, shell=True, stdout=DEVNULL, stderr=DEVNULL)
 
 # Function to terminate the script itself
 def terminate_script():
