@@ -17,36 +17,44 @@ Special thanks to [**Seedify HODLers**](https://t.me/SeedifyHODLers) for their a
 
 * [Requirements](#requirements)
 * [Usage](#usage)
-* [Reason Behind](#which-problems-are-users-facing-right-now)
+* [Reasons Behind](#which-problems-are-users-facing-right-now)
 * [What script does](#what-does-this-script-do-to-fix-those-problems)
 * [Additional Info](#additional-info)
-* [Troubleshooting](#troubleshooting)
 
 ------
 ## Requirements
 
 * Chrome is necessary to create shortcuts. If Chrome doesn't exist, script will apply other steps/fixes.
 * Allowing Metamask to run on incognito mode is necessary. `Extensions -> Metamask -> Details -> Allow in Incognito`
+* For Windows7/8 users (for executable version of Easify only): if the executable complains about some missing dll files try installing **Microsoft Visual C++ Redistributable** packages below (both are official Microsoft download links):
+
+[For Windows 7/8 32 bit](https://aka.ms/vs/17/release/vc_redist.x86.exe)
+
+[For Windows 7/8 64 bit](https://aka.ms/vs/17/release/vc_redist.x64.exe)
 
 ------
 ## Usage
 
 ### For basic users
 
-Just download and run the standalone executable via link below or from **[Windows](https://github.com/ZangetsuSF/easify/tree/main/Windows)** folder.
+Just download and run the standalone executable via links below or from **[Windows](https://github.com/ZangetsuSF/easify/tree/main/Windows)** folder.
 
-```
-https://github.com/ZangetsuSF/easify/raw/main/Windows/Easify.exe
-```
+[Download for Windows 7/8](https://github.com/ZangetsuSF/easify/raw/main/Windows/Easify_Win7_Win8.exe)
+
+[Download for Windows 10](https://github.com/ZangetsuSF/easify/raw/main/Windows/Easify_Win10.exe)
 
 ### For advanced users
 
 Clone the repo with and install required modules via following commands.
 
+Python 3.8 is required for Windows 7/8 users.
+
+Python 3.9 is required for Windows 10 users.
+
 ```
 git clone https://github.com/ZangetsuSF/easify.git
-pip install --upgrade admin keyboard pywin32
 cd easify
+pip install --upgrade -r requirements.txt
 python main.py
 ```
 
@@ -76,8 +84,8 @@ But current situation is not effective/optimal so I have decided to create a scr
 ## What does this script do to fix those problems?
 * Terminates all Chrome instances
 * Creates a directory on desktop called **Seedify**
-* Creates website _(check below for a list)_ shortcuts inside **Seedify** directory
-* Runs a few commands to fix network issues _(check below for a list)_
+* Creates [website shortcuts](#list-of-websites-shortcuts-created-by-script) inside **Seedify** directory
+* Runs [a few commands](#list-of-network-fix-commands) to fix network issues
 * Resets **Windows Time** service, sets its skew tolerance to maximum, syncs local time to internet time
 
 ------
@@ -125,18 +133,7 @@ https://seedifyhodlers.com/tools/roi/
 ------
 ### List of network fix commands
 ```
-netsh winsock reset 2> nul
-netsh int ip reset 2> nul
-ipconfig /flushdns 2> nul
+netsh winsock reset
+netsh int ip reset
+ipconfig /flushdns
 ```
-
-------
-## Troubleshooting
-
-### For Windows 7/8 users
-
-If the executable complains about some missing dll files try installing **Microsoft Visual C++ Redistributable** packages below (both are official Microsoft links):
-
-[For Windows 7/8 32 bit](https://aka.ms/vs/17/release/vc_redist.x86.exe)
-
-[For Windows 7/8 64 bit](https://aka.ms/vs/17/release/vc_redist.x64.exe)
