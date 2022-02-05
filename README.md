@@ -2,15 +2,15 @@
 
 This is a Python script which tries to fix some issues that Windows users are experiencing while using **Seedify Fund** website (IGO participation, claiming, staking/farming).
 
-Created by **@ZangetsuSF**
-
-Telegram admin at [**Seedify Fund Turkish Group**](https://t.me/sfundturkey)
-
-[**Seedify Fund official website**](https://launchpad.seedify.fund/)
-
-Special thanks to [**Seedify HODLers**](https://t.me/SeedifyHODLers) for their awesome tools and feedbacks about this script.
-
 **NOTE:** This is **NOT** an **OFFICIAL Seedify Fund** tool/script. Please read LICENSE before using it.
+
+------
+
+[**Seedify Fund Official Website**](https://launchpad.seedify.fund/)
+
+[**Seedify Fund Official Telegram Channel**](https://t.me/seedifyfundofficial)
+
+Special thanks to [**Seedify HODLers**](https://t.me/SeedifyHODLers) for their awesome tools and their constructive feedback about this script.
 
 ------
 ## Index
@@ -20,36 +20,29 @@ Special thanks to [**Seedify HODLers**](https://t.me/SeedifyHODLers) for their a
 * [Reasons Behind](#which-problems-are-users-facing-right-now)
 * [What script does](#what-does-this-script-do-to-fix-those-problems)
 * [Additional Info](#additional-info)
+* [Troubleshooting](#troubleshooting)
 
 ------
 ## Requirements
 
-* Chrome is necessary to create shortcuts. If Chrome doesn't exist, script will apply other steps/fixes.
-* Allowing Metamask to run on incognito mode is necessary. `Extensions -> Metamask -> Details -> Allow in Incognito`
-* For Windows7/8 users (for executable version of Easify only): if the executable complains about some missing dll files try installing **Microsoft Visual C++ Redistributable** packages below (both are official Microsoft download links):
-
-[For Windows 7/8 32 bit](https://aka.ms/vs/17/release/vc_redist.x86.exe)
-
-[For Windows 7/8 64 bit](https://aka.ms/vs/17/release/vc_redist.x64.exe)
+* Script needs Windows 7/8/10 to operate.
+* Chrome is needed to create shortcuts. If Chrome doesn't exist, script will apply other steps/fixes.
+* Allowing Chrome Metamask extension to run on incognito mode is necessary. `Extensions -> Metamask -> Details -> Allow in Incognito`
 
 ------
 ## Usage
 
 ### For basic users
 
-Just download and run the standalone executable via links below or from **[Windows](https://github.com/ZangetsuSF/easify/tree/main/Windows)** folder.
-
-[Download for Windows 7/8](https://github.com/ZangetsuSF/easify/raw/main/Windows/Easify_Win7_Win8.exe)
-
-[Download for Windows 10](https://github.com/ZangetsuSF/easify/raw/main/Windows/Easify_Win10.exe)
+* Download the standalone executable by [**clicking here**](https://github.com/ZangetsuSF/easify/raw/main/Windows/Easify.exe) or manually from [**Windows**](https://github.com/ZangetsuSF/easify/tree/main/Windows) folder
+* Run the executable (it is a self-extracting 7-zip archive, will create a folder named **Easify**)
+* Open **Easify** folder and run **Easify.exe**
 
 ### For advanced users
 
+Using Python 3.8 is suggested.
+
 Clone the repo with and install required modules via following commands.
-
-Python 3.8 is required for Windows 7/8 users.
-
-Python 3.9 is required for Windows 10 users.
 
 ```
 git clone https://github.com/ZangetsuSF/easify.git
@@ -58,26 +51,26 @@ pip install --upgrade -r requirements.txt
 python main.py
 ```
 
-Dependencies to create your own executables:
+To create your own executable version via **PyInstaller**:
 ```
 pip install --upgrade pyinstaller pywin32 pefile
 ```
 
 Executable creation command (run inside **easify** directory):
 ```
-pyinstaller --clean --distpath Windows --name Easify --onefile main.py
+pyinstaller --clean --distpath Windows --name Easify main.py
 ```
 
 ------
 ## Which problems are users facing right now?
 * Chrome shows an old version of web page from its cache _(causing users to not be able to claim/approve etc)_
-* Chrome Translate _(if user enables it)_ changes numbers and some details on page, making it unusable _(shows wrong info and sometimes buttons don't work)_
+* Chrome Translate _(if user enables it)_ changes numbers and some details on web page, making it unusable _(shows wrong info and sometimes buttons don't work)_
 * Users' PC time is not always in sync _(causing them to not be able to join IGO pools in time)_
 * Users forget or don't know which projects are claimed from **Seedify Fund** website and which are claimed from their own websites
-* Users don't always use official links, sometimes they use scam links when they see on scam Telegram channels or when a scammer messages them
+* Users don't always use official links, sometimes they use links from scam Telegram channels or scammer messages
 * Users always ask for links of **Vesting Table**, **Combotools** and related trusted tools/websites
 
-To avoid these problems, as **Seedify Fund admins**, we are constantly telling our users to ***clear browser cache/cookies***, ***sync PC time***, ***only use official links*** etc.
+To avoid these problems, as **Seedify Fund admins**, we always remind our users to ***clear browser cache/cookies***, ***sync PC time***, ***only use official links*** etc.
 But current situation is not effective/optimal so I have decided to create a script to help **Seedify Fund** users.
 
 ------
@@ -137,3 +130,17 @@ netsh winsock reset
 netsh int ip reset
 ipconfig /flushdns
 ```
+
+------
+### Tested On
+
+Virtualbox VMs: Windows 7 (32/64 bit), Windows 8.1 (64 bit), Windows 10 (64 bit)
+
+------
+## Troubleshooting
+
+If you are getting error messages about missing dll files on Windows 7/8 (Windows 10 includes all dlls), try installing **Microsoft Visual C++ Redistributable** packages below (both are official Microsoft download links):
+
+[For Windows 7/8 32 bit](https://aka.ms/vs/17/release/vc_redist.x86.exe)
+
+[For Windows 7/8 64 bit](https://aka.ms/vs/17/release/vc_redist.x64.exe)
