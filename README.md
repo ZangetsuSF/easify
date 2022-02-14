@@ -40,7 +40,7 @@ Special thanks to [**Seedify HODLers**](https://t.me/SeedifyHODLers) for their a
 
 ### For advanced users
 
-Using Python 3.8 is suggested.
+Recommended Python version: 3.8
 
 Clone the repo with and install required modules via following commands.
 
@@ -56,9 +56,14 @@ To create your own executable version via **PyInstaller**:
 pip install --upgrade pyinstaller pywin32 pefile
 ```
 
-Executable creation command (run inside **easify** directory):
+Executable creation command (run inside **easify** directory) on Windows:
 ```
-pyinstaller --clean --distpath Windows --name Easify main.py
+pyinstaller --clean --add-data "websites.txt;." --distpath Windows --name Easify main.py
+```
+
+Executable creation command (run inside **easify** directory) on Linux:
+```
+pyinstaller --clean --add-data "websites.txt:." --distpath Windows --name Easify main.py
 ```
 
 ------
@@ -79,7 +84,7 @@ But current situation is not effective/optimal so I have decided to create a scr
 * Creates a directory on desktop called **Seedify**
 * Creates [website shortcuts](#list-of-websites-shortcuts-created-by-script) inside **Seedify** directory
 * Runs [a few commands](#list-of-network-fix-commands) to fix network issues
-* Resets **Windows Time** service, sets its skew tolerance to maximum, syncs local time to internet time
+* Resets **Windows Time** service, sets its skew tolerance to maximum, syncs local time with internet time
 
 ------
 ## Additional Info
@@ -128,7 +133,12 @@ https://seedifyhodlers.com/tools/roi/
 ```
 netsh winsock reset
 netsh int ip reset
+ipconfig /renew
+arp -d *
+nbtstat -R
+nbtstat -RR
 ipconfig /flushdns
+ipconfig /registerdns
 ```
 
 ------

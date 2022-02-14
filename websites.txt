@@ -1,0 +1,28 @@
+#
+# List of websites and their details (empty lines are bypassed while processing, lines are comma separated)
+# shortcut file name, website address, shortcut file description
+#
+
+Buy SFUND (Incognito), https://pancakeswap.finance/swap?inputCurrency=0x477bc8d23c634c154061869478bce96be6045d12 https://trade.kucoin.com/trade/SFUND-USDT https://www.gate.io/trade/sfund_usdt, Chrome link to open SFUND trade pages in incognito mode.
+
+KYC Check - Blockpass Login (Incognito), https://identity.blockpass.org/frontend/#/register/input, Chrome link to open Blockpass Login page in incognito mode.
+
+Seedify - Launchpad (Incognito), https://launchpad.seedify.fund, Chrome link to open Seedify website in incognito mode.
+
+Seedify - Staking-Farming (Incognito), https://staking.seedify.fund/, Chrome link to open Seedify staking/farming page in incognito mode.
+
+Seedify - Claim (Incognito), https://claim.seedify.fund/, Chrome link to open Seedify claim page in incognito mode.
+
+Seedify - Vesting Table (Incognito), https://tinyurl.com/Seedify-IGO-Vesting, Chrome link to open Seedify Fund Vesting Table in incognito mode.
+
+Claim - ScottyBeam (Incognito), https://claim.scottybeam.io, Chrome link to open ScottyBeam Claim page in incognito mode.
+
+Claim - Hololoot (Incognito), https://claiming.hololoot.io, Chrome link to open Hololoot Claim page in incognito mode.
+
+Claim - BitHotel (Incognito), https://investors.bithotel.io, Chrome link to open BitHotel Claim page in incognito mode.
+
+Tools - Combotools - Investment Tracker (Incognito), https://combotools.online/, Chrome link to open Combotools page in incognito mode.
+
+Tools - SFUND Calculator (Incognito), https://seedifyhodlers.com/tools/calculator, Chrome link to open SFUND Calculator page in incognito mode.
+
+Tools - ROI Tracker (Incognito), https://seedifyhodlers.com/tools/roi/, Chrome link to open ROI Tracker page in incognito mode.

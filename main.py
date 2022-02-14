@@ -45,8 +45,11 @@ chrome_exec_name = "chrome.exe"
 # Chrome path
 chrome_path = "Google\Chrome\Application"
 
-# Empty list to store website details
+# Empty website list for later use
 websites = []
+
+# File containing website details for shortcut creation
+website_list = "websites.txt"
 
 # Chrome arguments for shortcuts
 args = "--start-maximized \
@@ -74,19 +77,40 @@ directory_name = "Seedify"
 target_full_path = path.join(desktop, directory_name)
 
 ##############################################
+## Network Fix Commands
+##############################################
+
+# Resets Winsock settings
+reset_winsock = 'netsh winsock reset'
+
+# Resets TCP/IP settings
+reset_tcpip = 'netsh int ip reset'
+
+# Renews DHCP leases
+renew_dhcp = 'ipconfig /renew'
+
+# Flushes the Address Resolution Protocol (ARP) cache
+flush_arp = 'arp -d *'
+
+# Reloads the NetBIOS cache
+reload_netbios_cache = 'nbtstat -R'
+
+# Updates the NetBIOS name
+update_netbios_name = 'nbtstat -RR'
+
+# Flushes/Clears DNS cache
+flush_dns_cache = 'ipconfig /flushdns'
+
+# Re-registers with DNS
+register_with_DNS = 'ipconfig /registerdns'
+
+##############################################
 ## Other Variables
 ##############################################
 
 # Registry keys
 HKEY_LOCAL_MACHINE = 0x80000002
 HKEY_CURRENT_USER = 0x80000001
-
-# Commands to fix network issues
-fix_network_issues_1 = 'netsh winsock reset'
-fix_network_issues_2 = 'netsh int ip reset'
-
-# Command to clear DNS cache
-flush_dns = 'ipconfig /flushdns'
 
 # Windows Time Service commands
 enable_timesync_service = 'w32tm /register'
@@ -185,7 +209,7 @@ def show_warning():
     if lang == "tr_TR":
         if chrome_exists:
             print("Tüm Chrome pencereleri kapatılacak!{}Yarım kalan işlerinizi tamamlamadan devam etmeyin!{}".format(newline, newline))
-            print("İşlem yapmadan çıkmak için{}pencerenin sağ üstköşesindeki X tuşu ile veya{}CTRL + C tuşkombinasyonu ile programı kapatın.{}".format(newline, newline, newline))
+            print("İşlem yapmadan çıkmak için{}pencerenin sağ üst köşesindeki X tuşu ile veya{}CTRL + C tuş kombinasyonu ile programı kapatın.{}".format(newline, newline, newline))
         else:
             print("Chrome kurulumu tespit edilemedi.{}Diğer işlemler uygulanacak.".format(newline))
 
@@ -268,97 +292,29 @@ def create_directory():
         except:
             terminate_script("Seedify directory creation has failed.")
 
-# Function to create a list of Seedify Fund related websites
+# Function to get website details from website_list file
 def create_website_list():
-    # CEX/DEX URLs to buy SFUND
-    add_to_list(
-        "https://pancakeswap.finance/swap?inputCurrency=0x477bc8d23c634c154061869478bce96be6045d12 \
-            https://trade.kucoin.com/trade/SFUND-USDT \
-            https://www.gate.io/trade/sfund_usdt",
-        "1- Buy SFUND (Incognito)",
-        "Chrome link to open SFUND trade pages in incognito mode."
-    )
+    global websites
 
-    # Seedify Fund official website
-    add_to_list(
-        "https://identity.blockpass.org/frontend/#/register/input",
-        "2- KYC Check - Blockpass Login (Incognito)",
-        "Chrome link to open Blockpass Login page in incognito mode."
-    )
+    count = 0
 
-    # Seedify Fund official website
-    add_to_list(
-        "https://launchpad.seedify.fund",
-        "3- Seedify - Launchpad (Incognito)",
-        "Chrome link to open Seedify website in incognito mode."
-    )
+    with open(website_list, 'r') as details:
+        lines = filter(None, (temp_line.strip() for temp_line in details))
 
-    # Seedify Fund staking page
-    add_to_list(
-        "https://staking.seedify.fund/",
-        "4- Seedify - Staking-Farming (Incognito)",
-        "Chrome link to open Seedify staking/farming page in incognito mode."
-    )
+        for line in lines:
+            # avoid comment lines
+            if (not line.startswith("#")):
+                line_parts = line.split(",")
 
-    # Seedify Fund claim page
-    add_to_list(
-        "https://claim.seedify.fund/",
-        "5- Seedify - Claim (Incognito)",
-        "Chrome link to open Seedify claim page in incognito mode."
-    )
+                count+=1
+                line_parts[0] = str(count) + "- " + line_parts[0]
 
-    # Seedify Fund claim page
-    add_to_list(
-        "https://tinyurl.com/Seedify-IGO-Vesting",
-        "6- Seedify - Vesting Table (Incognito)",
-        "Chrome link to open Seedify Fund Vesting Table in incognito mode."
-    )
+                websites.append([line_parts[0].strip(), line_parts[1].strip(), line_parts[2].strip()])
 
-    # Claim URL for Scotty Beam project
-    add_to_list(
-        "https://claim.scottybeam.io",
-        "7- Claim - ScottyBeam (Incognito)",
-        "Chrome link to open ScottyBeam Claim page in incognito mode."
-    )
+        # [print(w) for w in websites]
+        # sys.exit()
 
-    # Claim URL for Hololoot project
-    add_to_list(
-        "https://claiming.hololoot.io",
-        "8- Claim - Hololoot (Incognito)",
-        "Chrome link to open Hololoot Claim page in incognito mode."
-    )
-
-    # Claim URL for Bit Hotel project
-    add_to_list(
-        "https://investors.bithotel.io",
-        "9- Claim - BitHotel (Incognito)",
-        "Chrome link to open BitHotel Claim page in incognito mode."
-    )
-
-    # Combotools URL - Seedify HODLers
-    add_to_list(
-        "https://combotools.online/",
-        "10- Tools - Combotools - Investment Tracker (Incognito)",
-        "Chrome link to open Combotools page in incognito mode."
-    )
-
-    # Calculator URL - Seedify HODLers
-    add_to_list(
-        "https://seedifyhodlers.com/tools/calculator",
-        "11- Tools - SFUND Calculator (Incognito)",
-        "Chrome link to open SFUND Calculator page in incognito mode."
-    )
-
-    # ROI Tracker URL - Seedify HODLers
-    add_to_list(
-        "https://seedifyhodlers.com/tools/roi/",
-        "12- Tools - ROI Tracker (Incognito)",
-        "Chrome link to open ROI Tracker page in incognito mode."
-    )
-
-# Function to create website list
-def add_to_list(shortcut_url, shortcut_filename, shortcut_desc):
-    websites.append([shortcut_url, shortcut_filename, shortcut_desc])
+    return websites
 
 # Function to create website shortcuts inside Seedify directory
 def create_shortcuts():
@@ -379,7 +335,7 @@ def create_shortcuts():
         [create_chrome_shortcut(w[0], w[1], w[2], target_full_path, desktop, chrome_fullpath, args) for w in websites]
 
 # Function to create shortcut files
-def create_chrome_shortcut( target_url, file_name, desc, target_dir, work_dir, chrome_exec, args):
+def create_chrome_shortcut(file_name, target_url, desc, target_dir, work_dir, chrome_exec, args):
     shell = Dispatch('WScript.Shell')
     shortcut = shell.CreateShortCut(path.join(target_dir, file_name) + ".lnk")
 
@@ -395,17 +351,17 @@ def create_chrome_shortcut( target_url, file_name, desc, target_dir, work_dir, c
 # Function to fix network issues
 def fix_network():
     if lang == "tr_TR":
-        print("* Temel ağ problemleri çözülüyor...")
+        print("* Temel ağ problemleri çözülüyor (bir dakika kadar sürebilir)...")
     else:
-        print("* Fixing basic network issues...")
+        print("* Fixing basic network issues (might take a minute)...")
 
     try:
-        for s in fix_network_issues_1, fix_network_issues_2, flush_dns:
+        for s in reset_winsock, reset_tcpip, renew_dhcp, flush_arp, reload_netbios_cache, update_netbios_name, flush_dns_cache, register_with_DNS:
             execute_command(s)
             sleep(2)
     except:
         sleep(1)
-        for s in fix_network_issues_1, fix_network_issues_2, flush_dns:
+        for s in reset_winsock, reset_tcpip, renew_dhcp, flush_arp, reload_netbios_cache, update_netbios_name, flush_dns_cache, register_with_DNS:
             execute_command(s)
             sleep(2)
 
